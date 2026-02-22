@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>IBD Clinical & PBS Prescribing Guide</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -30,38 +30,37 @@
 
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-        /* --- HEADER & CONTEXT TOGGLE --- */
-        header { background: linear-gradient(135deg, var(--primary), #1e3a8a); color: white; padding: 2.5rem 5% 4.5rem 5%; text-align: center; }
-        header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-        header p { font-size: 1.1rem; font-weight: 300; opacity: 0.9; max-width: 650px; margin: 0 auto 1.5rem auto; }
+        /* --- HEADER & MAIN CONTROLS --- */
+        header { background: linear-gradient(135deg, var(--primary), #1e3a8a); color: white; padding: 2.5rem 5% 4rem 5%; text-align: center; }
+        header h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+        header p { font-size: clamp(0.9rem, 3vw, 1.1rem); font-weight: 300; opacity: 0.9; max-width: 650px; margin: 0 auto 1.5rem auto; }
 
         .context-toggle-wrapper { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .context-toggle { background: rgba(255, 255, 255, 0.1); border-radius: 99px; padding: 0.3rem; display: inline-flex; border: 1px solid rgba(255,255,255,0.2); }
+        .context-toggle { background: rgba(255, 255, 255, 0.1); border-radius: 99px; padding: 0.3rem; display: inline-flex; border: 1px solid rgba(255,255,255,0.2); max-width: 100%; overflow-x: auto;}
         .context-btn {
-            background: transparent; border: none; color: rgba(255,255,255,0.7); font-family: inherit; font-size: 0.95rem; font-weight: 600;
-            padding: 0.6rem 1.5rem; border-radius: 99px; cursor: pointer; transition: all 0.2s;
+            background: transparent; border: none; color: rgba(255,255,255,0.7); font-family: inherit; font-size: clamp(0.8rem, 2vw, 0.95rem); font-weight: 600;
+            padding: 0.6rem 1.2rem; border-radius: 99px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
         }
         .context-btn:hover { color: white; }
         .context-btn.active { background: white; color: var(--primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
 
-        /* --- MAIN CONTROLS --- */
-        .main-controls { max-width: 1200px; margin: -2.5rem auto 2rem auto; background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; position: relative; z-index: 10; }
-        @media(max-width: 768px) { .main-controls { grid-template-columns: 1fr; } }
+        .main-controls { max-width: 1200px; margin: -2rem auto 2rem auto; background: white; padding: 1.25rem; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; position: relative; z-index: 10; width: 92%; }
         
-        .form-control { width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--primary-border); border-radius: 8px; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; background-color: var(--primary-light); }
+        .form-control { width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--primary-border); border-radius: 8px; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; background-color: var(--primary-light); appearance: none; -webkit-appearance: none;}
         .form-control:focus { border-color: var(--secondary); background-color: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        select.form-control { background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 1rem top 50%; background-size: 0.65rem auto; padding-right: 2.5rem; }
 
         /* --- GRID & CARDS --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem 1rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
-        .card { background: var(--bg-card); border: 1px solid var(--primary-border); border-radius: 16px; padding: 1.5rem; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .card { background: var(--bg-card); border: 1px solid var(--primary-border); border-radius: 16px; padding: 1.25rem; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.1); border-color: var(--accent); }
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem; }
-        .card-title { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
-        .card-brand { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .card-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+        .card-brand { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.3; }
         
         .badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: auto; }
-        .badge { padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.05em; }
+        .badge { padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.65rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.05em; }
         .bg-iv { background: var(--success); } .bg-sc { background: var(--warning); color: #000; } .bg-po { background: var(--secondary); }
         .bg-ind { background: #e2e8f0; color: var(--primary); } .bg-class { background: var(--primary); }
 
@@ -71,112 +70,128 @@
         .modal-content { background: white; width: 100%; max-width: 1200px; height: 95vh; border-radius: 16px; display: flex; flex-direction: column; transform: translateY(20px) scale(0.98); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
-        .modal-header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--primary-border); display: flex; justify-content: space-between; align-items: flex-start; }
-        .close-btn { background: #f1f5f9; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .modal-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--primary-border); display: flex; justify-content: space-between; align-items: flex-start; }
+        .close-btn { background: #f1f5f9; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0;}
         .close-btn:hover { background: #e2e8f0; color: var(--danger); }
-        .modal-body { padding: 0; overflow-y: auto; flex: 1; display: flex; flex-direction: column; }
+        .modal-body { padding: 0; overflow-y: auto; flex: 1; display: flex; flex-direction: column; -webkit-overflow-scrolling: touch; }
 
         /* --- TABS --- */
-        .tabs { display: flex; background: #f8fafc; border-bottom: 1px solid var(--primary-border); position: sticky; top: 0; z-index: 10; }
-        .tab { flex: 1; text-align: center; padding: 1rem; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--text-muted); border-bottom: 3px solid transparent; transition: all 0.2s; }
+        .tabs { display: flex; background: #f8fafc; border-bottom: 1px solid var(--primary-border); position: sticky; top: 0; z-index: 10; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;}
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab { flex: 1; min-width: max-content; text-align: center; padding: 1rem; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); border-bottom: 3px solid transparent; transition: all 0.2s; }
         .tab:hover { color: var(--secondary); background: white; }
         .tab.active { color: var(--secondary); border-bottom-color: var(--secondary); background: white; }
-        .tab-content { display: none; padding: 2rem; animation: fadeIn 0.2s ease-in; flex: 1;}
+        .tab-content { display: none; padding: 1.5rem; animation: fadeIn 0.2s ease-in; flex: 1;}
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- TYPOGRAPHY --- */
-        h3 { color: var(--primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem; border-bottom: 2px solid var(--primary-light); padding-bottom: 0.4rem;}
+        h3 { color: var(--primary); margin: 1.25rem 0 0.5rem 0; font-size: 1.1rem; border-bottom: 2px solid var(--primary-light); padding-bottom: 0.4rem;}
         h3:first-child { margin-top: 0; }
-        ul { margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-dark); }
+        ul { margin-left: 1.25rem; margin-bottom: 1rem; color: var(--text-dark); }
         li { margin-bottom: 0.4rem; font-size: 0.95rem; }
         .highlight-text { font-weight: 600; color: var(--primary); }
         
-        .alert-box { padding: 1rem 1.25rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.5; background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+        .alert-box { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.4; background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
         .alert-box.warning { background: #fffbeb; border-color: #fde68a; color: #b45309; }
         .alert-box.danger { background: #fef2f2; border-color: #fecaca; color: #be123c; }
 
         /* --- ESCALATION CARDS --- */
-        .escalation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
-        @media(max-width: 768px) { .escalation-grid { grid-template-columns: 1fr; } }
+        .escalation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
         .esc-card { border-radius: 12px; border: 1px solid; overflow: hidden; }
-        .esc-header { padding: 1rem 1.25rem; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .esc-body { padding: 1.25rem; background: white; font-size: 0.95rem; }
+        .esc-header { padding: 0.8rem 1rem; font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .esc-body { padding: 1rem; background: white; font-size: 0.9rem; }
         .esc-body p { margin-bottom: 0.5rem; }
         .esc-body ul { margin-bottom: 0; }
-        
-        .esc-pbs { border-color: #86efac; }
-        .esc-pbs .esc-header { background: var(--success-light); color: #166534; }
-        
-        .esc-comp { border-color: #fcd34d; }
-        .esc-comp .esc-header { background: var(--warning-light); color: #92400e; }
+        .esc-pbs { border-color: #86efac; } .esc-pbs .esc-header { background: var(--success-light); color: #166534; }
+        .esc-comp { border-color: #fcd34d; } .esc-comp .esc-header { background: var(--warning-light); color: #92400e; }
 
         /* --- PBS CONTROLS & TABLE --- */
-        .pbs-controls-header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+        .pbs-controls-header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; }
         .pill-group { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
-        .pill-btn { padding: 0.5rem 1.25rem; border-radius: 99px; border: 1px solid var(--primary-border); background: white; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+        .pill-btn { padding: 0.4rem 1rem; border-radius: 99px; border: 1px solid var(--primary-border); background: white; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
         .pill-btn:hover { border-color: var(--secondary); color: var(--secondary); }
         .pill-btn.active { background: var(--secondary); color: white; border-color: var(--secondary); box-shadow: 0 4px 6px -1px rgba(37,99,235,0.2); }
-        .context-badge { margin-left: auto; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border); }
+        .context-badge { padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border); }
 
-        .phase-explainer { background: white; border: 1px solid var(--primary-border); border-radius: 8px; overflow: hidden; margin-bottom: 1.5rem; }
-        .phase-explainer-header { padding: 0.75rem 1rem; background: var(--primary-light); font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); }
-        .phase-explainer-header:hover { background: #f1f5f9; }
+        .phase-explainer { background: white; border: 1px solid var(--primary-border); border-radius: 8px; overflow: hidden; }
+        .phase-explainer-header { padding: 0.75rem 1rem; background: var(--primary-light); font-weight: 600; font-size: 0.85rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); }
         .phase-explainer-content { padding: 1rem; font-size: 0.85rem; display: none; border-top: 1px solid var(--primary-border); background: white; }
         .phase-explainer-content.active { display: block; }
-        .phase-explainer-content ul { margin-left: 1rem; margin-bottom: 0; }
         
-        .weight-calculator { background: var(--secondary-light); border: 1px solid #bfdbfe; padding: 1rem 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;}
-        .weight-input { width: 90px; padding: 0.5rem; border: 1px solid #93c5fd; border-radius: 6px; font-weight: bold; font-size: 1.1rem; text-align: center; outline: none; }
-        .weight-input:focus { border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
-        .weight-result { font-size: 1.05rem; color: var(--secondary); flex: 1; }
+        .weight-calculator { background: var(--secondary-light); border: 1px solid #bfdbfe; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;}
+        .weight-input { width: 80px; padding: 0.5rem; border: 1px solid #93c5fd; border-radius: 6px; font-weight: bold; font-size: 1rem; text-align: center; outline: none; }
+        .weight-result { font-size: 0.95rem; color: var(--secondary); flex: 1; }
 
+        /* Desktop Table View */
         .pbs-table-wrapper { overflow-x: auto; border-radius: 8px; border: 1px solid var(--primary-border); background: white; }
         .pbs-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
-        .pbs-table th, .pbs-table td { border-bottom: 1px solid var(--primary-border); padding: 0.85rem 1rem; vertical-align: middle; }
+        .pbs-table th, .pbs-table td { border-bottom: 1px solid var(--primary-border); padding: 0.75rem 1rem; vertical-align: middle; }
         .pbs-table th { background-color: var(--primary-light); color: var(--primary); font-weight: 600; white-space: nowrap; }
         .pbs-table tr:last-child td { border-bottom: none; }
         .pbs-table tbody tr:hover { background-color: #f8fafc; }
         
-        .auth-badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+        .auth-badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; white-space: nowrap; display: inline-block;}
         .auth-streamlined { background: #ede9fe; color: #6d28d9; border: 1px solid #ddd6fe; }
         .auth-written { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
         .auth-phone { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
 
-        .code-pill {
-            display: inline-flex; align-items: center; gap: 0.4rem; background: #f1f5f9; padding: 0.3rem 0.6rem; 
-            border-radius: 6px; font-family: monospace; font-size: 0.95rem; font-weight: 700; color: var(--primary);
-            cursor: pointer; border: 1px solid var(--primary-border); transition: all 0.2s;
-        }
-        .code-pill:hover { background: #e2e8f0; border-color: #cbd5e1; transform: translateY(-1px); }
-        .code-pill::after { content: '📋'; font-size: 0.8rem; filter: grayscale(1); opacity: 0.6;}
+        .code-pill { display: inline-flex; align-items: center; gap: 0.4rem; background: #f1f5f9; padding: 0.3rem 0.5rem; border-radius: 6px; font-family: monospace; font-size: 0.9rem; font-weight: 700; color: var(--primary); cursor: pointer; border: 1px solid var(--primary-border); transition: all 0.2s; white-space: nowrap;}
+        .code-pill:active { transform: scale(0.95); }
+        .code-pill::after { content: '📋'; font-size: 0.75rem; filter: grayscale(1); opacity: 0.6;}
         .code-copied { background: var(--success) !important; color: white !important; border-color: var(--success) !important; }
         .code-copied::after { content: '✓'; filter: none; opacity: 1;}
-
         .code-streamline { color: #6d28d9; background: #f5f3ff; border-color: #ede9fe; }
-        .code-streamline:hover { background: #ede9fe; border-color: #ddd6fe; }
 
         .qty-badge { background: #f1f5f9; color: var(--primary); padding: 2px 8px; border-radius: 4px; font-weight: 700; border: 1px solid #e2e8f0; text-align: center; display: inline-block;}
         .rpt-badge { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 4px; font-weight: 700; border: 1px solid #bbf7d0; text-align: center; display: inline-block;}
+        .td-codes { display: flex; flex-direction: column; gap: 0.3rem; align-items: flex-start; }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media(max-width: 768px) {
+            .main-controls { grid-template-columns: 1fr; margin-top: -1.5rem; padding: 1rem; width: 90%; }
+            .modal-overlay { padding: 0; align-items: flex-end; }
+            .modal-content { height: 95vh; max-height: 95vh; border-radius: 20px 20px 0 0; transform: translateY(100%); }
+            .modal-header { padding: 1rem; border-radius: 20px 20px 0 0;}
+            #modalTitle { font-size: 1.4rem; }
+            .tab-content { padding: 1rem; }
+            .escalation-grid { grid-template-columns: 1fr; }
+            .context-badge { margin-left: 0; width: 100%; text-align: center;}
+            
+            /* Responsive Card-Based Table for Mobile */
+            .pbs-table-wrapper { border: none; background: transparent; }
+            .pbs-table thead { display: none; }
+            .pbs-table, .pbs-table tbody, .pbs-table tr, .pbs-table td { display: block; width: 100%; }
+            .pbs-table tr { margin-bottom: 1rem; border: 1px solid var(--primary-border); border-radius: 12px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.02); overflow: hidden;}
+            .pbs-table td { 
+                display: flex; justify-content: space-between; align-items: center; 
+                padding: 0.75rem 1rem; border-bottom: 1px solid #f1f5f9; text-align: right;
+            }
+            .pbs-table td::before { 
+                content: attr(data-label); font-weight: 600; color: var(--text-muted); 
+                font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; padding-right: 1rem; text-align: left;
+            }
+            .pbs-table td:last-child { border-bottom: none; }
+            .td-codes { align-items: flex-end; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>IBD Clinical & PBS Guide</h1>
-        <p>Interactive prescribing tool with quick-filtering, weight-based calculators, escalation rules, and setting-specific Item codes.</p>
+        <h1>IBD Clinical Guide</h1>
+        <p>Interactive prescribing tool with mobile-optimized PBS codes, calculators, and escalation rules.</p>
         
-        <!-- Global Context Toggle -->
         <div class="context-toggle-wrapper">
             <div class="context-toggle">
-                <button class="context-btn active" id="btn-context-public" onclick="setGlobalContext('public')">🏥 Public Hospital (S100)</button>
-                <button class="context-btn" id="btn-context-private" onclick="setGlobalContext('private')">🏢 Private Hospital / Community</button>
+                <button class="context-btn active" id="btn-context-public" onclick="setGlobalContext('public')">🏥 Public Hosp (S100)</button>
+                <button class="context-btn" id="btn-context-private" onclick="setGlobalContext('private')">🏢 Private / Community</button>
             </div>
         </div>
     </header>
 
     <div class="main-controls">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search drug or brand (e.g. Stelara, Rinvoq)...">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search drug (e.g. Stelara, Rinvoq)...">
         <select id="indicationFilter" class="form-control">
             <option value="all">All Indications</option>
             <option value="UC">Ulcerative Colitis (UC)</option>
@@ -197,24 +212,24 @@
         <div class="grid" id="med-grid"></div>
     </div>
 
-    <!-- Modal Base -->
+    <!-- Modal -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <div>
-                    <h2 id="modalTitle" style="color: var(--primary); font-size: 1.8rem; font-weight: 700; margin-bottom: 0.2rem;"></h2>
-                    <div id="modalBrand" style="color: var(--text-muted); font-size: 1rem; font-style: italic;"></div>
-                    <div id="modalBadges" class="badges" style="margin-top: 0.8rem;"></div>
+                    <h2 id="modalTitle"></h2>
+                    <div id="modalBrand"></div>
+                    <div id="modalBadges" class="badges"></div>
                 </div>
                 <button class="close-btn" onclick="forceCloseModal()">&times;</button>
             </div>
             
             <div class="modal-body">
                 <div class="tabs">
-                    <div class="tab active" onclick="switchTab(this, 'tab-pbs')">PBS Criteria & Prescribing</div>
+                    <div class="tab active" onclick="switchTab(this, 'tab-pbs')">PBS Prescribing</div>
                     <div class="tab" onclick="switchTab(this, 'tab-dosing')">Dosing & Efficacy</div>
                     <div class="tab" onclick="switchTab(this, 'tab-escalation')">Dose Escalation</div>
-                    <div class="tab" onclick="switchTab(this, 'tab-safety')">Safety & Precautions</div>
+                    <div class="tab" onclick="switchTab(this, 'tab-safety')">Safety</div>
                 </div>
 
                 <div id="tab-pbs" class="tab-content active"><div id="pbs-dynamic-container"></div></div>
@@ -226,25 +241,20 @@
     </div>
 
     <script>
-        // --- GLOBAL STATE ---
-        let currentSettingContext = 'public'; // 'public' or 'private'
+        let currentSettingContext = 'public'; 
         let currentMed = null;
         let currentSelectedIndication = 'all';
 
-        // Update the global setting and re-render if modal is open
         function setGlobalContext(context) {
             currentSettingContext = context;
             document.getElementById('btn-context-public').classList.toggle('active', context === 'public');
             document.getElementById('btn-context-private').classList.toggle('active', context === 'private');
-            
-            // If modal is currently open, re-render the PBS table
             if (document.getElementById('modalOverlay').classList.contains('active') && currentMed) {
                 renderTable();
+                updateContextBadge();
             }
         }
 
-        // --- DATABASE ---
-        // Note the `context` attribute: "public", "private", or "both"
         const medications = [
             {
                 name: "Ustekinumab",
@@ -253,37 +263,25 @@
                 routes: ["IV", "SC"],
                 indications: ["UC", "CD"],
                 dosing: `
-                    <h3>Standard Dosing Regimen</h3>
+                    <h3>Standard Dosing</h3>
                     <ul>
-                        <li><span class="highlight-text">IV Induction (Wk 0):</span> Weight-based single dose (260mg, 390mg, or 520mg).</li>
-                        <li><span class="highlight-text">SC Maintenance:</span> 90 mg SC at Wk 8, then every 8 weeks.</li>
+                        <li><span class="highlight-text">IV Induction (Wk 0):</span> Weight-based single dose.</li>
+                        <li><span class="highlight-text">SC Maintenance:</span> 90 mg SC at Wk 8, then q8w.</li>
                     </ul>
-                    <h3>Efficacy</h3>
-                    <ul><li><span class="highlight-text">Onset:</span> ~7 weeks.</li><li><span class="highlight-text">Remission:</span> ~13 weeks.</li></ul>
                 `,
                 escalation: `
                     <div class="escalation-grid">
                         <div class="esc-card esc-pbs">
-                            <div class="esc-header">✅ PBS Allowed Escalation</div>
-                            <div class="esc-body">
-                                <ul>
-                                    <li><strong>Shortening to q8w:</strong> If a patient was historically initiated on q12w dosing, stepping up to q8w is allowed and covered under standard PBS maintenance codes.</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">✅ PBS Allowed</div>
+                            <div class="esc-body"><ul><li><strong>Shortening to q8w:</strong> Allowed if initiated on q12w.</li></ul></div>
                         </div>
                         <div class="esc-card esc-comp">
-                            <div class="esc-header">⚠️ Hospital / Compassionate Required</div>
-                            <div class="esc-body">
-                                <p>The following strategies are <strong>NOT funded</strong> by the PBS and require application to the Janssen compassionate program or hospital drug committees:</p>
-                                <ul>
-                                    <li><strong>Interval Shortening:</strong> Decreasing SC interval to 90mg every 4 weeks or 6 weeks.</li>
-                                    <li><strong>IV Re-induction:</strong> Giving a second weight-based IV dose for secondary loss of response.</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">⚠️ Hospital / Compassionate</div>
+                            <div class="esc-body"><ul><li><strong>Interval Shortening:</strong> Decreasing SC to q4w or q6w.</li><li><strong>IV Re-induction:</strong> Second weight-based IV dose.</li></ul></div>
                         </div>
                     </div>
                 `,
-                safety: `<div class="alert-box"><strong>Pregnancy Class B1:</strong> Likely safe.</div><ul><li>Infections, fatigue, injection site reactions.</li></ul>`,
+                safety: `<div class="alert-box"><strong>Pregnancy B1:</strong> Likely safe.</div>`,
                 pbsRules: {
                     criteria: "Failed conventional therapy.",
                     hasWeightCalc: true,
@@ -292,7 +290,7 @@
                         { ind: "UC", phase: "Initial (IV Load)", form: "130mg IV Vial", auth: "Written / PRODA", itemCode: "13272M", slCode: "-", qty: "Max 4", rpts: "0", context: "public" },
                         { ind: "UC", phase: "Initial (IV Load)", form: "130mg IV Vial", auth: "Written / PRODA", itemCode: "13255P", slCode: "-", qty: "Max 4", rpts: "0", context: "private" },
                         { ind: "UC", phase: "Balance (SC)", form: "90mg SC Syr", auth: "Telephone", itemCode: "13273N (Stelara)", slCode: "-", qty: "1", rpts: "0", context: "both" },
-                        { ind: "UC", phase: "1st Cont. (SC)", form: "90mg SC Syr", auth: "Written / PRODA", itemCode: "13261Y (Stelara)", slCode: "-", qty: "1", rpts: "2", context: "both" },
+                        { ind: "UC", phase: "1st Cont.", form: "90mg SC Syr", auth: "Written / PRODA", itemCode: "13261Y (Stelara)", slCode: "-", qty: "1", rpts: "2", context: "both" },
                         { ind: "UC", phase: "Subs Cont.", form: "90mg SC Syr (Stelara)", auth: "STREAMLINED", itemCode: "13261Y", slCode: "16945", qty: "1", rpts: "2", context: "both" },
                         { ind: "UC", phase: "Subs Cont.", form: "90mg SC Syr (Steqeyma)", auth: "STREAMLINED", itemCode: "14918E", slCode: "16945", qty: "1", rpts: "2", context: "both" },
                         
@@ -308,30 +306,20 @@
             },
             {
                 name: "Adalimumab",
-                brand: "Humira, Amgevita, Hadlima, Hyrimoz, Yuflyma, Abrilada",
+                brand: "Humira, Amgevita, Hadlima, Hyrimoz, Yuflyma",
                 classGroup: "Anti-TNFα",
                 routes: ["SC"],
                 indications: ["UC", "CD", "fCD"],
-                dosing: `
-                    <h3>Standard Dosing Regimen</h3>
-                    <ul><li><span class="highlight-text">Induction:</span> 160 mg SC Wk 0, 80 mg SC Wk 2.</li><li><span class="highlight-text">Maintenance:</span> 40 mg SC every 2 weeks.</li></ul>
-                `,
+                dosing: `<ul><li><span class="highlight-text">Induction:</span> 160 mg SC Wk 0, 80 mg SC Wk 2.</li><li><span class="highlight-text">Maintenance:</span> 40 mg SC every 2 weeks.</li></ul>`,
                 escalation: `
                     <div class="escalation-grid">
                         <div class="esc-card esc-pbs">
-                            <div class="esc-header">✅ PBS Allowed Escalation</div>
-                            <div class="esc-body">
-                                <p>Dose escalation is fully supported on the PBS for patients who experience secondary loss of response to standard maintenance.</p>
-                                <ul>
-                                    <li><strong>Interval Shortening:</strong> 40 mg SC weekly (prescribe Qty 4 per 28 days).</li>
-                                    <li><strong>Dose Doubling:</strong> 80 mg SC every 2 weeks (using 80mg pens, prescribe Qty 2 per 28 days).</li>
-                                </ul>
-                                <p style="margin-top:0.5rem; font-size:0.85rem; color:var(--text-muted);"><em>Note: Requires a new Authority application demonstrating the loss of response.</em></p>
-                            </div>
+                            <div class="esc-header">✅ PBS Allowed</div>
+                            <div class="esc-body"><ul><li><strong>Interval Shortening:</strong> 40 mg SC weekly.</li><li><strong>Dose Doubling:</strong> 80 mg SC every 2 weeks.</li></ul><p style="font-size:0.8rem; margin-top:5px;">Requires Authority demonstrating loss of response.</p></div>
                         </div>
                     </div>
                 `,
-                safety: `<div class="alert-box"><strong>Pregnancy Class B2:</strong> Low risk.</div>`,
+                safety: `<div class="alert-box"><strong>Pregnancy B2:</strong> Low risk.</div>`,
                 pbsRules: {
                     criteria: "Failed conventional therapy. Must meet severity criteria.",
                     hasWeightCalc: false,
@@ -359,33 +347,20 @@
                 classGroup: "Anti-TNFα",
                 routes: ["IV", "SC"],
                 indications: ["ASUC", "UC", "CD", "fCD"],
-                dosing: `
-                    <h3>Standard Dosing Regimen</h3>
-                    <ul><li><span class="highlight-text">IV Induction:</span> 5 mg/kg IV at Weeks 0, 2, and 6.</li><li><span class="highlight-text">SC Maintenance:</span> 120 mg SC every 2 weeks.</li></ul>
-                `,
+                dosing: `<ul><li><span class="highlight-text">IV Induction:</span> 5 mg/kg IV Wk 0, 2, 6.</li><li><span class="highlight-text">SC Maintenance:</span> 120 mg SC q2w.</li></ul>`,
                 escalation: `
                     <div class="escalation-grid">
                         <div class="esc-card esc-pbs">
-                            <div class="esc-header">✅ PBS Allowed Escalation</div>
-                            <div class="esc-body">
-                                <ul>
-                                    <li><strong>IV Escalation:</strong> Shortening the IV interval (e.g., to q6w or q4w) OR doubling the dose (10mg/kg q8w) is technically allowed on the PBS <strong>ONLY IF</strong> the total dose does not exceed the maximum allowable vials per script (usually 5 vials = 500mg).</li>
-                                    <li><em>Example:</em> A 50kg patient getting 10mg/kg needs 5 vials (Covered). A 75kg patient needs 8 vials (Requires hospital funding).</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">✅ PBS Allowed</div>
+                            <div class="esc-body"><ul><li><strong>IV Escalation:</strong> Shortening IV interval (e.g., q6w or q4w) OR doubling dose (10mg/kg q8w) is allowed ONLY IF total dose is ≤ 5 vials.</li></ul></div>
                         </div>
                         <div class="esc-card esc-comp">
-                            <div class="esc-header">⚠️ Hospital / Compassionate Required</div>
-                            <div class="esc-body">
-                                <ul>
-                                    <li><strong>High Dose IV:</strong> Any dose requiring >5 vials per infusion requires hospital drug committee funding or compassionate supply.</li>
-                                    <li><strong>Subcut Escalation:</strong> Increasing SC frequency to 120mg <strong>weekly</strong> is NOT PBS listed and requires compassionate access (e.g. via Celltrion).</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">⚠️ Hosp / Compassionate</div>
+                            <div class="esc-body"><ul><li><strong>High Dose IV:</strong> >5 vials requires hospital funding.</li><li><strong>Subcut Escalation:</strong> 120mg weekly NOT PBS listed.</li></ul></div>
                         </div>
                     </div>
                 `,
-                safety: `<div class="alert-box"><strong>Pregnancy Class B2:</strong> Low risk.</div>`,
+                safety: `<div class="alert-box"><strong>Pregnancy B2:</strong> Low risk.</div>`,
                 pbsRules: {
                     criteria: "Failed conventional therapy.",
                     hasWeightCalc: true,
@@ -418,29 +393,20 @@
                 classGroup: "Anti-Integrin / IL",
                 routes: ["IV", "SC"],
                 indications: ["UC", "CD"],
-                dosing: `<ul><li><span class="highlight-text">IV Induction:</span> 300 mg IV at Weeks 0, 2, and 6.</li><li><span class="highlight-text">SC Maintenance:</span> 108 mg SC every 2 weeks.</li></ul>`,
+                dosing: `<ul><li><span class="highlight-text">IV Induction:</span> 300 mg IV Wk 0, 2, 6.</li><li><span class="highlight-text">SC Maintenance:</span> 108 mg SC q2w.</li></ul>`,
                 escalation: `
                     <div class="escalation-grid">
                         <div class="esc-card esc-pbs">
-                            <div class="esc-header">✅ PBS Allowed Escalation</div>
-                            <div class="esc-body">
-                                <ul>
-                                    <li><strong>IV Interval Shortening:</strong> Increasing IV frequency to 300mg <strong>every 4 weeks</strong> is allowed on the PBS for patients who lose response to standard 8-weekly dosing.</li>
-                                    <li><em>Note:</em> Requires a new Authority demonstrating secondary loss of response.</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">✅ PBS Allowed</div>
+                            <div class="esc-body"><ul><li><strong>IV Interval Shortening:</strong> Increasing IV frequency to 300mg <strong>every 4 weeks</strong> is allowed.</li></ul></div>
                         </div>
                         <div class="esc-card esc-comp">
-                            <div class="esc-header">⚠️ Hospital / Compassionate Required</div>
-                            <div class="esc-body">
-                                <ul>
-                                    <li><strong>Subcut Escalation:</strong> Increasing the SC frequency to 108mg <strong>weekly</strong> is NOT listed on the PBS. It requires compassionate access or switching the patient back to IV q4w.</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">⚠️ Hosp / Compassionate</div>
+                            <div class="esc-body"><ul><li><strong>Subcut Escalation:</strong> 108mg <strong>weekly</strong> is NOT PBS listed.</li></ul></div>
                         </div>
                     </div>
                 `,
-                safety: `<div class="alert-box"><strong>Pregnancy Class B2:</strong> Low risk. Gut selective.</div>`,
+                safety: `<div class="alert-box"><strong>Pregnancy B2:</strong> Low risk.</div>`,
                 pbsRules: {
                     criteria: "Failed conventional therapy.",
                     hasWeightCalc: false,
@@ -463,23 +429,18 @@
                 classGroup: "JAK Inhibitor",
                 routes: ["PO"],
                 indications: ["UC", "CD"],
-                dosing: `<ul><li><span class="highlight-text">Induction:</span> 45 mg daily for 8-16 weeks.</li><li><span class="highlight-text">Maintenance:</span> 15 mg or 30 mg daily.</li></ul>`,
+                dosing: `<ul><li><span class="highlight-text">Induction:</span> 45 mg daily.</li><li><span class="highlight-text">Maintenance:</span> 15 mg or 30 mg daily.</li></ul>`,
                 escalation: `
                     <div class="escalation-grid">
                         <div class="esc-card esc-pbs">
-                            <div class="esc-header">✅ PBS Allowed Escalation</div>
-                            <div class="esc-body">
-                                <ul>
-                                    <li><strong>Induction Extension:</strong> The 45mg induction phase can be extended for an extra 8 weeks (Total 16 wks for UC, up to 24 wks for CD) if initial response is delayed.</li>
-                                    <li><strong>Maintenance Step-Up:</strong> If a patient loses response on 15mg daily, stepping up to <strong>30mg daily</strong> is fully supported on the PBS.</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">✅ PBS Allowed</div>
+                            <div class="esc-body"><ul><li><strong>Induction Extension:</strong> 45mg can be extended (16wks UC, 24wks CD).</li><li><strong>Maintenance Step-Up:</strong> Stepping up from 15mg to <strong>30mg daily</strong> is supported.</li></ul></div>
                         </div>
                     </div>
                 `,
-                safety: `<div class="alert-box danger"><strong>Pregnancy Class D:</strong> Strictly Contraindicated.</div><ul><li><strong style="color:var(--danger)">Shingles:</strong> 14x increased risk. Shingrix mandatory.</li></ul>`,
+                safety: `<div class="alert-box danger"><strong>Pregnancy D:</strong> Contraindicated.</div>`,
                 pbsRules: {
-                    criteria: "UC: Failed conventional AND 1 prior biologic. CD: Failed conventional AND 2 prior biologics.",
+                    criteria: "UC: Failed 1 prior biologic. CD: Failed 2 prior biologics.",
                     hasWeightCalc: false,
                     data: [
                         { ind: "UC", phase: "Initial", form: "45mg Tabs", auth: "Written / PRODA", itemCode: "13262B", slCode: "-", qty: "28", rpts: "3", context: "both" },
@@ -503,32 +464,24 @@
                 escalation: `
                     <div class="escalation-grid">
                         <div class="esc-card esc-pbs">
-                            <div class="esc-header">✅ PBS Allowed Escalation</div>
-                            <div class="esc-body">
-                                <ul>
-                                    <li><strong>Maintenance Step-Up:</strong> If a patient loses response on 5mg BD, maintaining them long-term on <strong>10mg BD</strong> is PBS allowed (though carries higher VTE/Shingles risk).</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">✅ PBS Allowed</div>
+                            <div class="esc-body"><ul><li><strong>Maintenance Step-Up:</strong> Maintaining long-term on <strong>10mg BD</strong> is PBS allowed.</li></ul></div>
                         </div>
                         <div class="esc-card esc-comp">
-                            <div class="esc-header">⚠️ Hospital / Off-Label</div>
-                            <div class="esc-body">
-                                <ul>
-                                    <li><strong>ASUC Rescue:</strong> Using 10mg TDS (three times daily) for a few days in Acute Severe UC is an off-label hospital protocol and is not standard PBS prescribing.</li>
-                                </ul>
-                            </div>
+                            <div class="esc-header">⚠️ Off-Label</div>
+                            <div class="esc-body"><ul><li><strong>ASUC Rescue:</strong> 10mg TDS is an off-label hospital protocol.</li></ul></div>
                         </div>
                     </div>
                 `,
-                safety: `<div class="alert-box danger"><strong>Pregnancy Class D:</strong> Strictly Contraindicated.</div>`,
+                safety: `<div class="alert-box danger"><strong>Pregnancy D:</strong> Contraindicated.</div>`,
                 pbsRules: {
-                    criteria: "Failed conventional therapy AND failed/intolerant to anti-TNFα OR vedolizumab.",
+                    criteria: "Failed anti-TNFα OR vedolizumab.",
                     hasWeightCalc: false,
                     data: [
                         { ind: "UC", phase: "Initial", form: "10mg Tabs", auth: "Written / PRODA", itemCode: "12588M", slCode: "-", qty: "56", rpts: "3", context: "both" },
-                        { ind: "UC", phase: "Continuing (Balance/Subs)", form: "10mg Tabs", auth: "Telephone", itemCode: "12589N", slCode: "-", qty: "56", rpts: "5", context: "both" },
+                        { ind: "UC", phase: "Continuing", form: "10mg Tabs", auth: "Telephone", itemCode: "12589N", slCode: "-", qty: "56", rpts: "5", context: "both" },
                         { ind: "UC", phase: "Initial", form: "5mg Tabs", auth: "Written / PRODA", itemCode: "12556W", slCode: "-", qty: "56", rpts: "3", context: "both" },
-                        { ind: "UC", phase: "Continuing (Balance/Subs)", form: "5mg Tabs", auth: "Telephone", itemCode: "12557X", slCode: "-", qty: "56", rpts: "5", context: "both" }
+                        { ind: "UC", phase: "Continuing", form: "5mg Tabs", auth: "Telephone", itemCode: "12557X", slCode: "-", qty: "56", rpts: "5", context: "both" }
                     ]
                 }
             }
@@ -589,7 +542,7 @@
             document.getElementById('modalBadges').innerHTML = routesHtml + indHtml + `<span class="badge bg-class">${med.classGroup}</span>`;
 
             tabDosing.innerHTML = med.dosing;
-            tabEscalation.innerHTML = med.escalation || '<p style="color:var(--text-muted); font-style:italic;">No dose escalation pathways currently recommended or funded for this agent.</p>';
+            tabEscalation.innerHTML = med.escalation || '<p style="color:var(--text-muted); font-style:italic;">No dose escalation pathways currently recommended or funded.</p>';
             tabSafety.innerHTML = med.safety;
             
             currentSelectedIndication = med.indications.length > 0 ? med.indications[0] : 'all';
@@ -618,7 +571,7 @@
             container.innerHTML = '';
             if (!med.pbsRules) return;
 
-            let html = `<div class="alert-box"><strong>PBS Criteria:</strong> ${med.pbsRules.criteria}</div>`;
+            let html = `<div class="alert-box"><strong>Criteria:</strong> ${med.pbsRules.criteria}</div>`;
 
             if (med.pbsRules.hasWeightCalc) {
                 html += `
@@ -637,13 +590,11 @@
             const availableInds = [...new Set(med.pbsRules.data.map(d => d.ind))];
             let pillsHtml = availableInds.map(i => `<button class="pill-btn ${i === currentSelectedIndication ? 'active' : ''}" onclick="setIndication('${i}')">${i}</button>`).join('');
 
-            let contextText = currentSettingContext === 'public' ? '🏥 Public Hospital' : '🏢 Private Hospital / Community';
-
             html += `
                 <div class="pbs-controls-header">
                     <div class="pill-group" id="ind-pills">
                         ${pillsHtml}
-                        <div class="context-badge">Filter applied: ${contextText}</div>
+                        <div class="context-badge" id="contextBadgeDisplay"></div>
                     </div>
                     <div class="phase-explainer">
                         <div class="phase-explainer-header" onclick="toggleExplainer()">
@@ -651,27 +602,35 @@
                         </div>
                         <div class="phase-explainer-content" id="explainer-content">
                             <ul>
-                                <li><strong>Initial (Induction):</strong> First ever script. Requires baseline clinical scores via Written/PRODA Authority.</li>
-                                <li><strong>Balance of Supply:</strong> Completes the induction period before evaluating maintenance. Usually a Telephone Authority.</li>
-                                <li><strong>1st Continuing:</strong> First maintenance script. Requires demonstrating clinical response via Written/PRODA.</li>
-                                <li><strong>Subsequent Continuing:</strong> Ongoing maintenance. For many biosimilars, this is a <strong>STREAMLINED</strong> authority. Put both the Item Code and Streamlined Code on the script.</li>
+                                <li><strong>Initial (Induction):</strong> First script. Requires baseline clinical scores via Written/PRODA.</li>
+                                <li><strong>Balance of Supply:</strong> Completes induction before evaluating maintenance. Usually Telephone.</li>
+                                <li><strong>1st Continuing:</strong> First maintenance script. Needs clinical response via Written/PRODA.</li>
+                                <li><strong>Subsequent Continuing:</strong> Ongoing maintenance. Often <strong>STREAMLINED</strong> (no phone call). Put both Item & Streamline codes on script.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="pbs-table-wrapper">
                     <table class="pbs-table">
-                        <thead><tr><th>Phase</th><th>Formulation</th><th>Authority Type</th><th>Item Code</th><th>Streamlined Code</th><th>Qty</th><th>Rpts</th></tr></thead>
+                        <thead><tr><th>Phase</th><th>Formulation</th><th>Authority</th><th>Item Code</th><th>Streamlined</th><th>Qty</th><th>Rpt</th></tr></thead>
                         <tbody id="pbsTableBody"></tbody>
                     </table>
                 </div>
             `;
             
             container.innerHTML = html;
+            updateContextBadge();
             if (med.pbsRules.hasWeightCalc) {
                 document.getElementById('calcWeight').addEventListener('input', (e) => calculateDose(e.target.value, med.pbsRules.calcType));
             }
             renderTable();
+        }
+
+        function updateContextBadge() {
+            const badge = document.getElementById('contextBadgeDisplay');
+            if (badge) {
+                badge.textContent = currentSettingContext === 'public' ? '🏥 Public Hosp (S100)' : '🏢 Private Hosp / Comm';
+            }
         }
 
         function toggleExplainer() {
@@ -705,7 +664,6 @@
         function renderTable() {
             const tbody = document.getElementById('pbsTableBody');
             
-            // Filter by Indication AND Global Context (Public vs Private)
             const filtered = currentMed.pbsRules.data.filter(d => 
                 (d.ind === currentSelectedIndication) && 
                 (d.context === 'both' || d.context === currentSettingContext)
@@ -723,21 +681,21 @@
 
                 let itemHtml = d.itemCode.split(', ').map(c => {
                     let clean = c.split(' ')[0];
-                    return `<span class="code-pill" onclick="copyCode(this, '${clean}')" title="Copy Item Code">${c}</span>`;
-                }).join('<br>');
+                    return `<div class="td-codes"><span class="code-pill" onclick="copyCode(this, '${clean}')" title="Copy Item Code">${c}</span></div>`;
+                }).join('');
 
                 let slHtml = d.slCode === '-' ? '<span style="color:var(--text-muted)">N/A</span>' : 
                     `<span class="code-pill code-streamline" onclick="copyCode(this, '${d.slCode}')" title="Copy Streamline Code">${d.slCode}</span>`;
 
                 return `
                 <tr>
-                    <td><strong>${d.phase}</strong></td>
-                    <td>${d.form}</td>
-                    <td><span class="auth-badge ${authClass}">${d.auth}</span></td>
-                    <td>${itemHtml}</td>
-                    <td>${slHtml}</td>
-                    <td style="text-align:center"><span class="qty-badge">${d.qty}</span></td>
-                    <td style="text-align:center"><span class="rpt-badge">${d.rpts}</span></td>
+                    <td data-label="Phase"><strong>${d.phase}</strong></td>
+                    <td data-label="Formulation">${d.form}</td>
+                    <td data-label="Authority"><span class="auth-badge ${authClass}">${d.auth}</span></td>
+                    <td data-label="Item Code">${itemHtml}</td>
+                    <td data-label="Streamlined">${slHtml}</td>
+                    <td data-label="Qty"><span class="qty-badge">${d.qty}</span></td>
+                    <td data-label="Rpts"><span class="rpt-badge">${d.rpts}</span></td>
                 </tr>
             `}).join('');
         }
